@@ -1,15 +1,13 @@
 <template>
-  <!-- <div v-if="error">Error: {{ error }}</div> -->
-  <!-- <div v-if="isFetching">loading...</div> -->
   <div class="carousel">
     <Card v-for="(user, index) in users" :key="index" :user="user" />
+    <button class="prev" @click="prev" :disabled="page === 1">prev</button>
+    <button class="next" @click="next">next</button>
   </div>
-  <!-- {{ data }} -->
 </template>
 
 <script setup>
-import { defineComponent, defineExpose, ref, onMounted } from 'vue'
-import { useFetch } from '@vueuse/core'
+import { defineComponent, ref, onMounted } from 'vue'
 import Card from './Card.vue'
 
 defineComponent({
@@ -17,27 +15,49 @@ defineComponent({
 })
 
 const users = ref([])
+const page = ref(1)
 
 const getUsers = async () => {
-  const response = await fetch('https://randomuser.me/api/?results=3')
+  const response = await fetch(
+    `https://randomuser.me/api/?inc=name,email,phone,picture,location&seed=abc&results=3&page=${page.value}`
+  )
   const { results } = await response.json()
   users.value = results
+}
 
-  console.log(users.value, 'users ref')
+const next = () => {
+  page.value++
+  getUsers()
+}
+
+const prev = () => {
+  if (page.value > 1) {
+    page.value--
+    getUsers()
+  }
 }
 
 onMounted(getUsers)
-
-getUsers()
-
-// // onMounted(() => {
-// //   execute()
-// // })
 </script>
 
 <style>
 .carousel {
   display: flex;
-  overflow: hidden;
+  /* overflow: scroll; */
+  position: relative;
+  justify-content: center;
+}
+
+.prev,
+.next {
+  position: absolute;
+  top: 60px;
+}
+
+.prev {
+  left: 0;
+}
+.next {
+  right: 0;
 }
 </style>
