@@ -1,6 +1,6 @@
 <template>
   <div class="carousel">
-    <Card v-for="(user, index) in users" :key="index" :user="user" />
+    <Card v-for="(user, index) in users" :key="index" :user="user" class="card" />
     <button class="prev" @click="prev" :disabled="page === 1">prev</button>
     <button class="next" @click="next">next</button>
   </div>
@@ -46,6 +46,9 @@ onMounted(getUsers)
   /* overflow: scroll; */
   position: relative;
   justify-content: center;
+  align-items: center;
+  height: 100vh;
+  gap: 20px;
 }
 
 .prev,
