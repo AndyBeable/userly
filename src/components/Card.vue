@@ -30,24 +30,23 @@ const fullName = computed(() => {
 })
 
 const location = computed(() => {
-  return props.user.location.city + ',' + props.user.location.country
+  return props.user.location.city + ', ' + props.user.location.country
 })
 </script>
 
 <style lang="scss">
 .user__content {
-  background: rgba(255, 253, 253, 0.2);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 7px 20px 1px rgba(209, 201, 209, 1);
   border: 1px solid rgba(227, 224, 224, 0.3);
-  width: 350px;
+  max-width: 100%; /* Ensure the card doesn't exceed its container's width */
   height: fit-content;
   border-radius: 8px;
-  padding: 10px;
+  padding: 10px 10px;
   text-align: center;
   background: #ededed;
 
   @media screen and (min-width: 768px) {
-    min-width: 400px;
+    width: 350px; /* Set to fixed width on larger screens */
   }
 }
 
@@ -59,6 +58,7 @@ const location = computed(() => {
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 5px;
+  padding-top: 10px;
 }
 
 .user__name {

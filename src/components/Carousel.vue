@@ -1,8 +1,12 @@
 <template>
   <div class="carousel">
     <Card v-for="(user, index) in users" :key="index" :user="user" class="card" />
-    <button class="prev" @click="prev" :disabled="page === 1">prev</button>
-    <button class="next" @click="next">next</button>
+    <button class="button prev" @click="prev" :disabled="page === 1">
+      <v-icon class="icon" name="bi-arrow-left" />
+    </button>
+    <button class="button next" @click="next">
+      <v-icon class="icon" name="bi-arrow-right" />
+    </button>
   </div>
 </template>
 
@@ -40,27 +44,63 @@ const prev = () => {
 onMounted(getUsers)
 </script>
 
-<style>
+<style lang="scss">
 .carousel {
   display: flex;
-  /* overflow: scroll; */
+  overflow: hidden; /* Hide the overflow */
   position: relative;
-  justify-content: center;
+  justify-content: center; /* Center items on the x-axis */
   align-items: center;
   height: 100vh;
   gap: 20px;
+  padding: 0 20px; /* Add horizontal padding */
 }
 
-.prev,
-.next {
+.card {
+  flex: 0 0 auto; /* Make the card size based on its content */
+  scroll-snap-align: start; /* Snap to the start */
+}
+
+.button {
   position: absolute;
-  top: 60px;
+  color: $color-secondary;
+  top: 250px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  transition: transform 0.3s; /* New line */
+}
+
+.button .icon {
+  transition: transform 0.3s ease-in-out;
+}
+
+.button:hover .icon {
+  transform: translateX(-5px);
+}
+
+.button.next:hover .icon {
+  transform: translateX(5px);
 }
 
 .prev {
   left: 0;
 }
+
 .next {
   right: 0;
+}
+
+@media (max-width: 600px) {
+  .carousel {
+    scroll-snap-type: x mandatory; /* Enable scroll snapping */
+  }
+  .card {
+    flex: 0 0 100%; /* Make the card take up the full width of its container on mobile */
+  }
+  .button {
+    top: auto;
+    bottom: 20px;
+  }
 }
 </style>
