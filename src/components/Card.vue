@@ -44,6 +44,7 @@ const location = computed(() => {
   padding: 10px 10px;
   text-align: center;
   background: #ededed;
+  font-weight: 300;
 
   @media screen and (min-width: 768px) {
     width: 350px; /* Set to fixed width on larger screens */
@@ -62,7 +63,6 @@ const location = computed(() => {
 }
 
 .user__name {
-  font-weight: 100;
   font-size: 1.25em;
   letter-spacing: 1px;
   color: $color-secondary;
@@ -74,6 +74,5 @@ const location = computed(() => {
 .user__phone,
 .user__location {
   color: $color-secondary;
-  font-weight: 100;
 }
 </style>

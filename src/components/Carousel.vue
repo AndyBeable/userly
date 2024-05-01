@@ -1,6 +1,8 @@
 <template>
   <div class="carousel">
+    <div v-if="isLoading" class="carousel__loading">Loading...</div>
     <Card
+      v-else
       v-for="(user, index) in users"
       :key="index"
       :user="user"
@@ -28,13 +30,18 @@ const props = defineProps(['backgroundColor'])
 
 const users = ref([])
 const page = ref(1)
+const isLoading = ref(false)
 
 const getUsers = async () => {
+  isLoading.value = true
+
   const response = await fetch(
     `https://randomuser.me/api/?inc=name,email,phone,picture,location&seed=abc&results=3&page=${page.value}`
   )
   const { results } = await response.json()
   users.value = results
+
+  isLoading.value = false
 }
 
 const next = () => {
@@ -62,6 +69,9 @@ onMounted(getUsers)
   height: 100vh;
   gap: 20px;
   padding: 0 20px; /* Add horizontal padding */
+}
+
+.carousel__loading {
 }
 
 .card {
