@@ -41,7 +41,6 @@ const selectedColor = (color) => {
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
-  /* padding: 0 20px; */
   margin-bottom: 40px;
 
   &__buttons {

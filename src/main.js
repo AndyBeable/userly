@@ -2,9 +2,15 @@ import { createApp } from 'vue'
 import App from './App.vue'
 
 import { OhVueIcon, addIcons } from 'oh-vue-icons'
-import { BiArrowLeft, BiArrowRight } from 'oh-vue-icons/icons'
+import {
+  BiArrowLeft,
+  BiArrowRight,
+  MdEmailOutlined,
+  BiTelephone,
+  CoLocationPin
+} from 'oh-vue-icons/icons'
 
-addIcons(BiArrowLeft, BiArrowRight)
+addIcons(BiArrowLeft, BiArrowRight, MdEmailOutlined, BiTelephone, CoLocationPin)
 
 const app = createApp(App)
 

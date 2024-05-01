@@ -56,16 +56,10 @@ body {
   padding: 20px 20px;
 }
 
-/* @media (min-width: 600px) {
-  .container {
-    width: 70%;
-    margin: 0 auto;
-  }
-} */
-
 .userly {
   max-width: 600px;
   margin: auto;
+  font-weight: 500;
 
   &__header {
     margin: 0;

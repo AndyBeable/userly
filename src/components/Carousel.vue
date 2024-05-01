@@ -1,18 +1,24 @@
 <template>
   <div class="carousel">
     <div v-if="isLoading" class="carousel__loading">Loading</div>
+    <div v-else-if="errorMessage">{{ errorMessage }}</div>
     <Card
       v-else
-      v-for="(user, index) in users"
+      v-for="(user, index) in displayedUsers"
       :key="index"
       :user="user"
       class="card"
       :background-color="props.backgroundColor"
     />
-    <button class="button prev" @click="prev" :disabled="page === 1">
+    <button
+      aria-label="Show next results"
+      class="button previous"
+      @click="prev"
+      :disabled="page === 1"
+    >
       <v-icon class="icon" name="bi-arrow-left" />
     </button>
-    <button class="button next" @click="next">
+    <button aria-label="Show previous results" class="button next" @click="next">
       <v-icon class="icon" name="bi-arrow-right" />
     </button>
   </div>
@@ -28,20 +34,33 @@ defineComponent({
 
 const props = defineProps(['backgroundColor'])
 
-const users = ref([])
+const allUsers = ref([])
+const displayedUsers = ref([])
 const page = ref(1)
 const isLoading = ref(false)
+const errorMessage = ref('')
 
 const getUsers = async () => {
   isLoading.value = true
 
-  const response = await fetch(
-    `https://randomuser.me/api/?inc=name,email,phone,picture,location&seed=abc&results=3&page=${page.value}`
-  )
-  const { results } = await response.json()
-  users.value = results
+  try {
+    const response = await fetch(
+      `https://randomuser.me/api/?inc=name,email,phone,picture,location&seed=abc&results=100&page=${page.value}`
+    )
 
-  isLoading.value = false
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`)
+    }
+
+    const { results } = await response.json()
+    allUsers.value = results
+    displayedUsers.value = allUsers.value.slice(0, 3)
+  } catch (error) {
+    console.error('There was an error with your fetch operation: ', error)
+    errorMessage.value = 'There was an error loading the data.'
+  } finally {
+    isLoading.value = false
+  }
 }
 
 const next = () => {
@@ -67,7 +86,6 @@ onMounted(getUsers)
   justify-content: center;
   height: 100vh;
   gap: 20px;
-  /* padding: 0 20px; */
 }
 
 .carousel__loading {
@@ -109,21 +127,26 @@ onMounted(getUsers)
   border: none;
   border-radius: 5px;
   transition: transform 0.3s;
+  cursor: pointer;
 }
 
 .button .icon {
   transition: transform 0.3s ease-in-out;
 }
 
-.button:hover .icon {
-  transform: translateX(-5px);
+.button:active {
+  transform: scale(0.9);
 }
 
-.button.next:hover .icon {
-  transform: translateX(5px);
+.button:hover:active .icon {
+  transform: translateX(-5px) scale(0.9);
 }
 
-.prev {
+.button.next:hover:active .icon {
+  transform: translateX(5px) scale(0.9);
+}
+
+.previous {
   left: 5%;
 }
 
@@ -140,7 +163,7 @@ onMounted(getUsers)
   }
 
   .button {
-    top: 60%;
+    top: 55%;
   }
 }
 </style>

@@ -6,11 +6,18 @@
       </div>
       <div class="user__details">
         <p class="user__name">{{ fullName }}</p>
-        <p class="user__email">{{ props.user.email }}</p>
+        <p class="user__email">
+          <v-icon class="icon" name="md-email-outlined" />
+          {{ props.user.email }}
+        </p>
         <p class="user__phone">
+          <v-icon class="icon" name="bi-telephone" />
           {{ props.user.phone }}
         </p>
-        <p class="user__location">{{ location }}</p>
+        <p class="user__location">
+          <v-icon class="icon" name="co-location-pin" />
+          {{ location }}
+        </p>
       </div>
     </div>
   </div>
@@ -36,7 +43,7 @@ const location = computed(() => {
 
 <style lang="scss">
 .user__content {
-  box-shadow: 0px 7px 20px 1px rgba(209, 201, 209, 1);
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   border: 1px solid rgba(227, 224, 224, 0.3);
   max-width: 100%;
   height: fit-content;
