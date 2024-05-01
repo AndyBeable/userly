@@ -1,6 +1,6 @@
 <template>
   <div class="user">
-    <div class="user__content">
+    <div class="user__content" :style="{ background: props.backgroundColor }">
       <div>
         <img :src="props.user.picture.large" alt="Profile Image" class="user__image" />
       </div>
@@ -23,7 +23,7 @@ defineComponent({
   name: 'Card'
 })
 
-const props = defineProps(['user'])
+const props = defineProps(['user', 'backgroundColor'])
 
 const fullName = computed(() => {
   return props.user.name.first + ' ' + props.user.name.last

@@ -6,14 +6,33 @@
         A free, open-source API for generating random user data. Like Lorem Ipsum, but for people.
       </p>
     </div>
-    <ColorPicker />
-    <Carousel />
+    <ColorPicker @color-selected="updateColor" />
+    <Carousel :background-color="backgroundColor" />
   </main>
 </template>
 
 <script setup>
+import { ref, watch, onMounted } from 'vue'
 import Carousel from './components/Carousel.vue'
 import ColorPicker from './components/ColorPicker.vue'
+
+const backgroundColor = ref(localStorage.getItem('backgroundColor') || '')
+
+const updateColor = (color) => {
+  backgroundColor.value = color
+  localStorage.setItem('backgroundColor', color)
+}
+
+watch(backgroundColor, (newColor) => {
+  localStorage.setItem('backgroundColor', newColor)
+})
+
+onMounted(() => {
+  const storedColor = localStorage.getItem('backgroundColor')
+  if (storedColor) {
+    backgroundColor.value = storedColor
+  }
+})
 </script>
 
 <style lang="scss">

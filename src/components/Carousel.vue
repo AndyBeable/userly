@@ -1,6 +1,12 @@
 <template>
   <div class="carousel">
-    <Card v-for="(user, index) in users" :key="index" :user="user" class="card" />
+    <Card
+      v-for="(user, index) in users"
+      :key="index"
+      :user="user"
+      class="card"
+      :background-color="props.backgroundColor"
+    />
     <button class="button prev" @click="prev" :disabled="page === 1">
       <v-icon class="icon" name="bi-arrow-left" />
     </button>
@@ -17,6 +23,8 @@ import Card from './Card.vue'
 defineComponent({
   name: 'Carousel'
 })
+
+const props = defineProps(['backgroundColor'])
 
 const users = ref([])
 const page = ref(1)
