@@ -1,6 +1,6 @@
 <template>
   <div class="carousel">
-    <div v-if="isLoading" class="carousel__loading">Loading...</div>
+    <div v-if="isLoading" class="carousel__loading">Loading</div>
     <Card
       v-else
       v-for="(user, index) in users"
@@ -62,31 +62,53 @@ onMounted(getUsers)
 <style lang="scss">
 .carousel {
   display: flex;
-  overflow: hidden; /* Hide the overflow */
+  overflow: hidden;
   position: relative;
-  justify-content: center; /* Center items on the x-axis */
-  align-items: center;
+  justify-content: center;
   height: 100vh;
   gap: 20px;
-  padding: 0 20px; /* Add horizontal padding */
+  /* padding: 0 20px; */
 }
 
 .carousel__loading {
+  font-size: 24px;
+}
+
+.carousel__loading:after {
+  overflow: hidden;
+  display: inline-block;
+  vertical-align: bottom;
+  -webkit-animation: ellipsis steps(4, end) 900ms infinite;
+  animation: ellipsis steps(4, end) 900ms infinite;
+  content: '\2026';
+  width: 0px;
+}
+
+@keyframes ellipsis {
+  to {
+    width: 1.25em;
+  }
+}
+
+@-webkit-keyframes ellipsis {
+  to {
+    width: 1.25em;
+  }
 }
 
 .card {
-  flex: 0 0 auto; /* Make the card size based on its content */
-  scroll-snap-align: start; /* Snap to the start */
+  flex: 0 0 auto;
+  scroll-snap-align: start;
 }
 
 .button {
   position: absolute;
   color: $color-secondary;
-  top: 250px;
+  top: 20%;
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
-  transition: transform 0.3s; /* New line */
+  transition: transform 0.3s;
 }
 
 .button .icon {
@@ -102,23 +124,23 @@ onMounted(getUsers)
 }
 
 .prev {
-  left: 0;
+  left: 5%;
 }
 
 .next {
-  right: 0;
+  right: 5%;
 }
 
 @media (max-width: 600px) {
   .carousel {
-    scroll-snap-type: x mandatory; /* Enable scroll snapping */
+    scroll-snap-type: x mandatory;
   }
   .card {
-    flex: 0 0 100%; /* Make the card take up the full width of its container on mobile */
+    flex: 0 0 100%;
   }
+
   .button {
-    top: auto;
-    bottom: 20px;
+    top: 60%;
   }
 }
 </style>

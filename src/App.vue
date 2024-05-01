@@ -1,12 +1,13 @@
 <template>
-  <main>
+  <main class="container">
     <div class="userly">
       <h1 class="userly__header">Userly</h1>
       <p class="userly__intro">
         A free, open-source API for generating random user data. Like Lorem Ipsum, but for people.
       </p>
+      <ColorPicker @color-selected="updateColor" />
     </div>
-    <ColorPicker @color-selected="updateColor" />
+
     <Carousel :background-color="backgroundColor" />
   </main>
 </template>
@@ -51,8 +52,20 @@ body {
   color: $color-secondary;
 }
 
-.userly {
+.container {
   padding: 20px 20px;
+}
+
+/* @media (min-width: 600px) {
+  .container {
+    width: 70%;
+    margin: 0 auto;
+  }
+} */
+
+.userly {
+  max-width: 600px;
+  margin: auto;
 
   &__header {
     margin: 0;
@@ -63,7 +76,10 @@ body {
   font-family: 'Montserrat', sans-serif;
 }
 
-main {
-  /* background: orange; */
+@media (min-width: 600px) {
+  .userly {
+    max-width: 60%;
+    margin: 0 170px;
+  }
 }
 </style>

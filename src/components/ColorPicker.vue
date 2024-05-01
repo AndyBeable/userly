@@ -27,7 +27,8 @@ const colors = [
   { name: 'red', hex: '#f99595d7' },
   { name: 'blue', hex: '#9fd8fbdf' },
   { name: 'yellow', hex: '#fcf649c2' },
-  { name: 'green', hex: '#b8f97ce3' }
+  { name: 'green', hex: '#b8f97ce3' },
+  { name: 'default', hex: '#f5f5f5' }
 ]
 
 const selectedColor = (color) => {
@@ -40,7 +41,8 @@ const selectedColor = (color) => {
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
-  padding: 0 20px;
+  /* padding: 0 20px; */
+  margin-bottom: 40px;
 
   &__buttons {
     display: flex;

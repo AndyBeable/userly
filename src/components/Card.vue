@@ -38,7 +38,7 @@ const location = computed(() => {
 .user__content {
   box-shadow: 0px 7px 20px 1px rgba(209, 201, 209, 1);
   border: 1px solid rgba(227, 224, 224, 0.3);
-  max-width: 100%; /* Ensure the card doesn't exceed its container's width */
+  max-width: 100%;
   height: fit-content;
   border-radius: 8px;
   padding: 10px 10px;
@@ -46,8 +46,8 @@ const location = computed(() => {
   background: #ededed;
   font-weight: 300;
 
-  @media screen and (min-width: 768px) {
-    width: 350px; /* Set to fixed width on larger screens */
+  @media screen and (min-width: 600px) {
+    width: 350px;
   }
 }
 
