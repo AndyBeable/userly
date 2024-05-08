@@ -1,7 +1,10 @@
 <template>
   <main class="container">
     <div class="userly">
-      <h1 class="userly__header">Userly</h1>
+      <div class="userly__header">
+        <v-icon class="icon" name="bi-person-circle" />
+        <h1>Userly</h1>
+      </div>
       <p class="userly__intro">
         A free, open-source API for generating random user data. Like Lorem Ipsum, but for people.
       </p>
@@ -62,6 +65,9 @@ body {
   font-weight: 500;
 
   &__header {
+    display: flex;
+    align-items: center;
+    gap: 5px;
     margin: 0;
   }
 }

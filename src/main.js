@@ -7,10 +7,11 @@ import {
   BiArrowRight,
   MdEmailOutlined,
   BiTelephone,
-  CoLocationPin
+  CoLocationPin,
+  BiPersonCircle
 } from 'oh-vue-icons/icons'
 
-addIcons(BiArrowLeft, BiArrowRight, MdEmailOutlined, BiTelephone, CoLocationPin)
+addIcons(BiArrowLeft, BiArrowRight, MdEmailOutlined, BiTelephone, CoLocationPin, BiPersonCircle)
 
 const app = createApp(App)
 

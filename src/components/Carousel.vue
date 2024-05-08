@@ -45,7 +45,7 @@ const getUsers = async () => {
 
   try {
     const response = await fetch(
-      `https://randomuser.me/api/?inc=name,email,phone,picture,location&seed=abc&results=100&page=${page.value}`
+      `https://randomuser.me/api/?inc=name,email,phone,picture,location&nat=us,gb&seed=abc&results=100&page=${page.value}`
     )
 
     if (!response.ok) {
